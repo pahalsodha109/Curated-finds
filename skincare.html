@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skin Care – Curated Finds</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #FAF7F2;
+    --warm-white: #FFFDF9;
+    --ink: #1A1612;
+    --muted: #6B6460;
+    --accent: #C4622D;
+    --accent-light: #F5E6DC;
+    --border: #E8E2D9;
+    --rose: #8B4B62;
+    --rose-light: #F5E0E9;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+  body { background: var(--cream); color: var(--ink); font-family: var(--sans); font-weight: 300; line-height: 1.7; }
+  a { color: inherit; text-decoration: none; }
+
+  nav { background: var(--warm-white); border-bottom: 1px solid var(--border); padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; }
+  .logo { font-family: var(--serif); font-size: 1.25rem; }
+  .logo span { color: var(--accent); font-style: italic; }
+  .nav-links { display: flex; gap: 2rem; font-size: 0.875rem; font-weight: 400; }
+  .nav-links a { color: var(--muted); transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+  .page-hero { padding: 4rem 5% 3rem; border-bottom: 1px solid var(--border); }
+  .breadcrumb { font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; }
+  .breadcrumb a { color: var(--accent); }
+  .page-hero h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 0.75rem; }
+  .page-hero p { color: var(--muted); max-width: 560px; font-size: 0.95rem; line-height: 1.8; }
+
+  .routine-note { margin: 2rem 5% 0; background: var(--rose-light); border-left: 3px solid var(--rose); padding: 1.25rem 1.5rem; border-radius: 0 8px 8px 0; max-width: 680px; }
+  .routine-note p { font-size: 0.875rem; color: var(--rose); line-height: 1.7; }
+  .routine-note strong { font-weight: 500; }
+
+  .products-section { padding: 3rem 5%; }
+  .section-title { font-family: var(--serif); font-size: 1.4rem; margin-bottom: 1.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; margin-bottom: 3.5rem; }
+  .product-card { background: var(--warm-white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; transition: box-shadow 0.2s, transform 0.2s; }
+  .product-card:hover { box-shadow: 0 6px 28px rgba(26,22,18,0.08); transform: translateY(-3px); }
+  .product-img { width: 100%; aspect-ratio: 1 / 1; background: var(--rose-light); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .product-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .product-img-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; width: 100%; height: 100%; color: var(--rose); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-align: center; }
+  .product-img-placeholder svg { opacity: 0.4; }
+  .product-body { padding: 1.25rem; display: flex; flex-direction: column; flex: 1; }
+  .product-tag { display: inline-block; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 20px; margin-bottom: 0.75rem; background: var(--rose-light); color: var(--rose); }
+  .product-body h3 { font-family: var(--serif); font-size: 1.05rem; line-height: 1.3; margin-bottom: 0.5rem; }
+  .product-body p { font-size: 0.875rem; color: var(--muted); line-height: 1.7; flex: 1; margin-bottom: 0.75rem; }
+  .skin-type { font-size: 0.78rem; color: var(--rose); font-style: italic; margin-bottom: 0.85rem; }
+  .product-badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
+  .badge { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 20px; }
+  .badge-rose { background: var(--rose-light); color: var(--rose); }
+  .badge-neutral { background: #EDE8E1; color: var(--muted); }
+  .badge-accent { background: var(--accent-light); color: var(--accent); }
+  .buy-btn { background: var(--rose); color: white; border: none; padding: 0.55rem 1rem; border-radius: 6px; font-family: var(--sans); font-size: 0.8rem; font-weight: 500; cursor: pointer; text-align: center; transition: opacity 0.2s; display: block; margin-top: auto; }
+  .buy-btn:hover { opacity: 0.85; }
+
+  .how-to-use { background: var(--warm-white); border: 1px solid var(--border); border-radius: 10px; padding: 1.75rem 2rem; margin-bottom: 3rem; }
+  .how-to-use h3 { font-family: var(--serif); font-size: 1.1rem; margin-bottom: 1rem; }
+  .routine-steps { display: flex; gap: 0; flex-wrap: wrap; }
+  .step { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem 1rem; flex: 1; min-width: 160px; }
+  .step-num { width: 24px; height: 24px; background: var(--rose); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 500; flex-shrink: 0; margin-top: 2px; }
+  .step-text strong { display: block; font-size: 0.82rem; font-weight: 500; margin-bottom: 0.2rem; }
+  .step-text span { font-size: 0.78rem; color: var(--muted); }
+
+  footer { background: var(--ink); color: #B0A89E; padding: 2.5rem 5%; font-size: 0.82rem; line-height: 1.8; margin-top: 4rem; }
+  footer strong { color: #FAF7F2; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1.5rem; }
+  .footer-nav { display: flex; gap: 1.5rem; }
+  .footer-nav a { color: #B0A89E; }
+  .footer-nav a:hover { color: #FAF7F2; }
+  @media (max-width: 640px) { .nav-links { display: none; } .routine-steps { flex-direction: column; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Curated <span>Finds</span></a>
+  <div class="nav-links">
+    <a href="furnishings.html">Home & Living</a>
+    <a href="books.html">Books</a>
+    <a href="skincare.html" class="active">Skin Care</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <p class="breadcrumb"><a href="index.html">Home</a> → Skin Care</p>
+  <h1>Skin Care</h1>
+  <p>Affordable, effective skincare actives that actually deliver results — all available on Amazon India, all researched and chosen carefully.</p>
+</div>
+
+<div class="routine-note">
+  <p><strong>A note before you buy:</strong> Actives like AHA, BHA, and glycolic acid are powerful. If you're new to these, start slow — once or twice a week, and always patch test first. Everyone's skin is different. When in doubt, consult a dermatologist.</p>
+</div>
+
+<div class="products-section">
+
+  <h2 class="section-title">Body Care</h2>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-img"><img src="wishcare-aha-bha-lotion.jpg" alt="WishCare AHA BHA Body Lotion"></div>
+      <div class="product-body">
+        <span class="product-tag">Body Lotion · Exfoliating</span>
+        <h3>WishCare AHA BHA Body Lotion</h3>
+        <p>This lotion has become a staple for smoothing and brightening skin texture over time. The combination of AHA and BHA works gently to exfoliate without a separate scrub. Absorbs well without feeling greasy — visible improvement to rough patches within a few weeks of consistent use.</p>
+        <p class="skin-type">Best for: Rough skin texture, keratosis pilaris, uneven tone on body</p>
+        <div class="product-badges"><span class="badge badge-rose">AHA + BHA</span><span class="badge badge-neutral">Non-greasy</span><span class="badge badge-accent">Affordable</span></div>
+        <a href="https://amzn.to/4dSegr9" target="_blank" rel="noopener" class="buy-btn">View on Amazon →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <h2 class="section-title">Targeted Treatments</h2>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-img"><img src="fixderma-skarfix.jpg" alt="Fixderma Skarfix"></div>
+      <div class="product-body">
+        <span class="product-tag">Pigmentation · Serum</span>
+        <h3>Fixderma Skarfix</h3>
+        <p>Specifically formulated to fade post-acne marks, scars, and hyperpigmentation. Fixderma is a trusted dermatology brand in India and this has a solid reputation for working on stubborn dark spots. Lightweight, layers well under moisturiser. Results take 6–8 weeks of consistent use.</p>
+        <p class="skin-type">Best for: Post-acne marks, dark spots, uneven skin tone</p>
+        <div class="product-badges"><span class="badge badge-rose">Scar Fading</span><span class="badge badge-neutral">Derma Brand</span></div>
+        <a href="https://amzn.to/4cesRvN" target="_blank" rel="noopener" class="buy-btn">View on Amazon →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <h2 class="section-title">Moisturisers</h2>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-img"><img src="emolene-cream.jpg" alt="Emolene Moisturizing Cream"></div>
+      <div class="product-body">
+        <span class="product-tag">Daily Moisturiser · Sensitive-Friendly</span>
+        <h3>Emolene Moisturizing Cream</h3>
+        <p>A dermatologist favourite that's been around for decades. Fragrance-free, non-comedogenic, and gentle enough for sensitive or compromised skin barriers. A proper emollient that actually protects and repairs dry skin — great as a barrier support cream when using strong actives.</p>
+        <p class="skin-type">Best for: Dry skin, sensitive skin, use alongside strong actives</p>
+        <div class="product-badges"><span class="badge badge-rose">Fragrance-Free</span><span class="badge badge-neutral">Dermatologist Fave</span><span class="badge badge-accent">Barrier Repair</span></div>
+        <a href="https://amzn.to/4sFhHWC" target="_blank" rel="noopener" class="buy-btn">View on Amazon →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <h2 class="section-title">Exfoliants & Actives</h2>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-img"><img src="minimalist-glycolic-toner.jpg" alt="Minimalist 8% Glycolic Acid Toner"></div>
+      <div class="product-body">
+        <span class="product-tag">Toner · Exfoliating</span>
+        <h3>Minimalist 8% Glycolic Acid Toner</h3>
+        <p>One of the best entry-level actives available in India at this price. Strong enough to produce real results — smoother texture, reduced pores, gradual brightening — without being too aggressive for beginners. Use 2–3 nights a week to start, always follow with SPF in the morning.</p>
+        <p class="skin-type">Best for: Dull skin, uneven texture, enlarged pores · Not for very sensitive skin</p>
+        <div class="product-badges"><span class="badge badge-rose">Glycolic Acid 8%</span><span class="badge badge-neutral">PM Use</span><span class="badge badge-accent">Beginner Friendly</span></div>
+        <a href="https://amzn.to/4v0tznK" target="_blank" rel="noopener" class="buy-btn">View on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img"><img src="minimalist-peeling-serum.jpg" alt="Minimalist 25% AHA + 2% BHA + 5% PHA Peeling Serum"></div>
+      <div class="product-body">
+        <span class="product-tag">Peeling Solution · Advanced</span>
+        <h3>Minimalist 25% AHA + 2% BHA + 5% PHA Peeling Serum</h3>
+        <p>The heavy-hitter. A combination exfoliant with high AHA for surface renewal, BHA to clear congestion, and PHA for gentler exfoliation and hydration. Use maximum once a week, leave on for no more than 10 minutes, rinse thoroughly, and follow with a barrier moisturiser. Results are impressive.</p>
+        <p class="skin-type">For experienced users · Not for beginners or sensitive skin types</p>
+        <div class="product-badges"><span class="badge badge-rose">AHA 25%</span><span class="badge badge-rose">BHA 2%</span><span class="badge badge-rose">PHA 5%</span><span class="badge badge-neutral">Weekly Use</span></div>
+        <a href="https://amzn.to/4m5nLpe" target="_blank" rel="noopener" class="buy-btn">View on Amazon →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <h2 class="section-title">How to Layer These Products</h2>
+  <div class="how-to-use">
+    <h3>A suggested evening routine using these picks</h3>
+    <div class="routine-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Cleanse</strong><span>Start with clean, dry skin</span></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Glycolic Toner</strong><span>On non-peeling nights, 2–3x/week</span></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Skarfix Serum</strong><span>Wait 15 min after actives</span></div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text"><strong>Emolene</strong><span>Always finish with moisturiser</span></div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-text"><strong>SPF in the AM</strong><span>Non-negotiable when using actives</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <strong>Curated Finds</strong><br>
+      As an Amazon Associate I earn from qualifying purchases.<br>
+      These recommendations are personal, not medical advice.
+    </div>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a>
+      <a href="furnishings.html">Home & Living</a>
+      <a href="books.html">Books</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curated Finds – Curated Finds Worth Buying</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #FAF7F2;
+    --warm-white: #FFFDF9;
+    --ink: #1A1612;
+    --muted: #6B6460;
+    --accent: #C4622D;
+    --accent-light: #F5E6DC;
+    --border: #E8E2D9;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+  body { background: var(--cream); color: var(--ink); font-family: var(--sans); font-weight: 300; line-height: 1.7; }
+  a { color: inherit; text-decoration: none; }
+
+  /* NAV */
+  nav { background: var(--warm-white); border-bottom: 1px solid var(--border); padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; }
+  .logo { font-family: var(--serif); font-size: 1.25rem; letter-spacing: 0.01em; }
+  .logo span { color: var(--accent); font-style: italic; }
+  .nav-links { display: flex; gap: 2rem; font-size: 0.875rem; font-weight: 400; }
+  .nav-links a { color: var(--muted); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero { padding: 6rem 5% 5rem; max-width: 860px; }
+  .hero-tag { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; }
+  .hero h1 { font-family: var(--serif); font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.15; font-weight: 700; margin-bottom: 1.5rem; }
+  .hero h1 em { color: var(--accent); font-style: italic; }
+  .hero p { font-size: 1.05rem; color: var(--muted); max-width: 540px; line-height: 1.8; margin-bottom: 2.5rem; }
+  .disclaimer { font-size: 0.8rem; color: var(--muted); border-left: 2px solid var(--border); padding-left: 1rem; max-width: 480px; }
+
+  /* CATEGORY GRID */
+  .section { padding: 4rem 5%; }
+  .section-label { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; }
+  .section-title { font-family: var(--serif); font-size: 2rem; margin-bottom: 3rem; }
+  .cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .cat-card { background: var(--warm-white); border: 1px solid var(--border); border-radius: 12px; padding: 2.5rem 2rem; transition: transform 0.2s, box-shadow 0.2s; cursor: pointer; }
+  .cat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(26,22,18,0.08); }
+  .cat-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .cat-card h3 { font-family: var(--serif); font-size: 1.35rem; margin-bottom: 0.5rem; }
+  .cat-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.5rem; }
+  .cat-link { font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); display: inline-flex; align-items: center; gap: 0.4rem; }
+  .cat-link::after { content: '→'; transition: transform 0.2s; }
+  .cat-card:hover .cat-link::after { transform: translateX(4px); }
+
+  /* DIVIDER */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 0 5%; }
+
+  /* ABOUT STRIP */
+  .about-strip { padding: 4rem 5%; display: flex; gap: 4rem; align-items: center; flex-wrap: wrap; }
+  .about-text { flex: 1; min-width: 280px; }
+  .about-text h2 { font-family: var(--serif); font-size: 1.75rem; margin-bottom: 1rem; }
+  .about-text p { color: var(--muted); font-size: 0.95rem; line-height: 1.8; }
+  .about-stats { display: flex; gap: 2.5rem; flex-wrap: wrap; }
+  .stat { text-align: center; }
+  .stat-num { font-family: var(--serif); font-size: 2.5rem; font-style: italic; color: var(--accent); display: block; }
+  .stat-label { font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+  /* FOOTER */
+  footer { background: var(--ink); color: #B0A89E; padding: 2.5rem 5%; font-size: 0.82rem; line-height: 1.8; }
+  footer strong { color: #FAF7F2; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1.5rem; }
+  .footer-nav { display: flex; gap: 1.5rem; }
+  .footer-nav a { color: #B0A89E; transition: color 0.2s; }
+  .footer-nav a:hover { color: #FAF7F2; }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .about-strip { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Curated <span>Finds</span></div>
+  <div class="nav-links">
+    <a href="furnishings.html">Home & Living</a>
+    <a href="books.html">Books</a>
+    <a href="skincare.html">Skin Care</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <p class="hero-tag">Curated with care</p>
+  <h1>Things genuinely worth buying, carefully chosen.</h1>
+  <p>A hand-picked selection of products across home, books, and skincare — chosen after real research, not paid placements.</p>
+  <p class="disclaimer">This site contains affiliate links. If you buy through them, I may earn a small commission — at no extra cost to you. I only recommend things worth your money.</p>
+</section>
+
+<hr class="divider">
+
+<section class="section">
+  <p class="section-label">Browse by category</p>
+  <h2 class="section-title">What would you like to find?</h2>
+  <div class="cat-grid">
+    <a href="furnishings.html" class="cat-card">
+      <div class="cat-icon">🪑</div>
+      <h3>Home & Living</h3>
+      <p>From zero-gravity chairs to clever bathroom storage — pieces that make everyday life a little more beautiful and functional.</p>
+      <span class="cat-link">Browse picks</span>
+    </a>
+    <a href="books.html" class="cat-card">
+      <div class="cat-icon">📚</div>
+      <h3>Books</h3>
+      <p>Design reads, Hindi sahitya, and the stack on my nightstand right now. Books that actually changed how I think.</p>
+      <span class="cat-link">Browse picks</span>
+    </a>
+    <a href="skincare.html" class="cat-card">
+      <div class="cat-icon">✨</div>
+      <h3>Skin Care</h3>
+      <p>Affordable, effective actives that work. I've cut my routine down to what actually delivers results — here's what made the cut.</p>
+      <span class="cat-link">Browse picks</span>
+    </a>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="about-strip">
+  <div class="about-text">
+    <h2>Why trust these picks?</h2>
+    <p>Every product listed here has been researched thoroughly — either used firsthand or shortlisted after careful comparison. No paid placements, no brand deals. Just honest picks for people who hate wasting money on the wrong thing.</p>
+  </div>
+  <div class="about-stats">
+    <div class="stat">
+      <span class="stat-num">20+</span>
+      <span class="stat-label">Products reviewed</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">3</span>
+      <span class="stat-label">Categories</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">0</span>
+      <span class="stat-label">Paid promotions</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <strong>Curated Finds</strong><br>
+      Honest product recommendations with affiliate links.<br>
+      As an Amazon Associate I earn from qualifying purchases.
+    </div>
+    <nav class="footer-nav">
+      <a href="furnishings.html">Home & Living</a>
+      <a href="books.html">Books</a>
+      <a href="skincare.html">Skin Care</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

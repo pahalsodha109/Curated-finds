@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Books – Curated Finds</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #FAF7F2;
+    --warm-white: #FFFDF9;
+    --ink: #1A1612;
+    --muted: #6B6460;
+    --accent: #C4622D;
+    --accent-light: #F5E6DC;
+    --border: #E8E2D9;
+    --teal: #2D7A6E;
+    --teal-light: #DDF0EC;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+  body { background: var(--cream); color: var(--ink); font-family: var(--sans); font-weight: 300; line-height: 1.7; }
+  a { color: inherit; text-decoration: none; }
+
+  nav { background: var(--warm-white); border-bottom: 1px solid var(--border); padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; }
+  .logo { font-family: var(--serif); font-size: 1.25rem; }
+  .logo span { color: var(--accent); font-style: italic; }
+  .nav-links { display: flex; gap: 2rem; font-size: 0.875rem; font-weight: 400; }
+  .nav-links a { color: var(--muted); transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+  .page-hero { padding: 4rem 5% 3rem; border-bottom: 1px solid var(--border); }
+  .breadcrumb { font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; }
+  .breadcrumb a { color: var(--accent); }
+  .page-hero h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 0.75rem; }
+  .page-hero p { color: var(--muted); max-width: 560px; font-size: 0.95rem; }
+
+  .products-section { padding: 3rem 5%; }
+  .section-title { font-family: var(--serif); font-size: 1.4rem; margin-bottom: 1.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+
+  .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; margin-bottom: 3.5rem; }
+  .book-card { background: var(--warm-white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; transition: box-shadow 0.2s, transform 0.2s; }
+  .book-img { width: 100%; aspect-ratio: 1 / 1; background: var(--accent-light); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .book-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .book-img-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; width: 100%; height: 100%; color: var(--accent); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-align: center; }
+  .book-img-placeholder svg { opacity: 0.4; }
+  .book-body { padding: 1.25rem; display: flex; flex-direction: column; flex: 1; }
+  .book-card:hover { box-shadow: 0 6px 28px rgba(26,22,18,0.08); transform: translateY(-3px); }
+  .book-spine { width: 36px; height: 5px; border-radius: 2px; background: var(--accent); margin-bottom: 1.25rem; }
+  .book-spine.teal { background: var(--teal); }
+  .book-card h3 { font-family: var(--serif); font-size: 1.05rem; line-height: 1.3; margin-bottom: 0.3rem; }
+  .book-author { font-size: 0.78rem; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.85rem; }
+  .book-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.7; flex: 1; margin-bottom: 1.25rem; }
+  .book-tag { display: inline-block; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 20px; margin-bottom: 1rem; }
+  .tag-accent { background: var(--accent-light); color: var(--accent); }
+  .tag-teal { background: var(--teal-light); color: var(--teal); }
+  .buy-btn { background: var(--ink); color: var(--cream); border: none; padding: 0.55rem 1rem; border-radius: 6px; font-family: var(--sans); font-size: 0.8rem; font-weight: 500; cursor: pointer; text-align: center; transition: opacity 0.2s; display: block; }
+  .buy-btn:hover { opacity: 0.8; }
+  .buy-btn.accent { background: var(--accent); }
+
+  footer { background: var(--ink); color: #B0A89E; padding: 2.5rem 5%; font-size: 0.82rem; line-height: 1.8; margin-top: 4rem; }
+  footer strong { color: #FAF7F2; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1.5rem; }
+  .footer-nav { display: flex; gap: 1.5rem; }
+  .footer-nav a { color: #B0A89E; }
+  .footer-nav a:hover { color: #FAF7F2; }
+
+  @media (max-width: 640px) { .nav-links { display: none; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Curated <span>Finds</span></a>
+  <div class="nav-links">
+    <a href="furnishings.html">Home & Living</a>
+    <a href="books.html" class="active">Books</a>
+    <a href="skincare.html">Skin Care</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <p class="breadcrumb"><a href="index.html">Home</a> → Books</p>
+  <h1>Books</h1>
+  <p>A reading list spanning Hindi sahitya, design classics, and contemporary Indian fiction — with honest notes on each.</p>
+</div>
+
+<div class="products-section">
+
+  <h2 class="section-title">Hindi Sahitya</h2>
+  <div class="book-grid">
+
+    <div class="book-card">
+      <div class="book-img"><img src="deewar-mein-ek-khidki.jpg" alt="दीवार में एक खिड़की रहती थी"></div>
+      <div class="book-body"><div class="book-spine"></div>
+      <span class="book-tag tag-accent">Hindi Fiction</span>
+      <h3>दीवार में एक खिड़की रहती थी</h3>
+      <p class="book-author">Vinod Kumar Shukla</p>
+      <p>Vinod Kumar Shukla writes in a way that makes the ordinary feel profound and slightly surreal. This novel follows a simple domestic life with such precise, unhurried observation that you finish it feeling like you've been somewhere very quiet and very true.</p>
+      <a href="https://amzn.to/4sRcqLR" target="_blank" rel="noopener" class="buy-btn accent">Buy on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-img"><img src="kewal-jaden-hai.jpg" alt="केवल जड़ें हैं"></div>
+      <div class="book-body"><div class="book-spine"></div>
+      <span class="book-tag tag-accent">Hindi Poetry</span>
+      <h3>केवल जड़ें हैं</h3>
+      <p class="book-author">Vinod Kumar Shukla</p>
+      <p>A poetry collection that rewards slow reading. Shukla has a gift for finding the uncanny inside the everyday — these poems are rooted (as the title suggests) but reach in unexpected directions. Lovely if you want Hindi poetry that isn't overwrought or sentimental.</p>
+      <a href="https://amzn.to/4bHfIeG" target="_blank" rel="noopener" class="buy-btn accent">Buy on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-img"><img src="amrita-pritam-imroz.jpg" alt="अमृता प्रीतम और इमरोज़ की अमर प्रेम कथा"></div>
+      <div class="book-body"><div class="book-spine"></div>
+      <span class="book-tag tag-accent">Biography</span>
+      <h3>अमृता प्रीतम और इमरोज़ की अमर प्रेम कथा</h3>
+      <p class="book-author">Uma Trilok</p>
+      <p>The story of Amrita Pritam and Imroz's 40-year relationship is one of the most remarkable in Indian literary history. This book is a tender, careful account of a love that defied every convention. Essential reading for anyone who cares about Amrita Pritam's work and life.</p>
+      <a href="https://www.amazon.in/dp/939282078X" target="_blank" rel="noopener" class="buy-btn accent">Buy on Amazon →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <h2 class="section-title">All-Time Favourites</h2>
+  <div class="book-grid">
+
+    <div class="book-card">
+      <div class="book-img"><img src="the-alchemist.jpg" alt="The Alchemist"></div>
+      <div class="book-body"><div class="book-spine teal"></div>
+      <span class="book-tag tag-teal">Classic</span>
+      <h3>The Alchemist</h3>
+      <p class="book-author">Paulo Coelho</p>
+      <p>I know everyone's read it, but I reread it every few years and always find something new. It's deceptively simple — a story about a shepherd boy seeking treasure — but the ideas about following your personal legend hit differently depending on where you are in life when you read it.</p>
+      <a href="https://amzn.to/4uXhqju" target="_blank" rel="noopener" class="buy-btn">Buy on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-img"><img src="zen-pencils.jpg" alt="Zen Pencils"></div>
+      <div class="book-body"><div class="book-spine teal"></div>
+      <span class="book-tag tag-teal">Illustrated</span>
+      <h3>Zen Pencils</h3>
+      <p class="book-author">Gavin Aung Thang</p>
+      <p>Inspirational quotes reimagined as comic strips. That sounds cheesy but the execution is beautiful — Gavin pairs quotes from writers, scientists, and philosophers with original illustrations that genuinely elevate the words. A great gift for creative people and a lovely coffee table book.</p>
+      <a href="https://amzn.to/3NV3sht" target="_blank" rel="noopener" class="buy-btn">Buy on Amazon →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <h2 class="section-title">7 Must-Read Design Books</h2>
+  <div class="book-grid">
+
+    <div class="book-card">
+      <div class="book-img"><img src="design-as-art.jpg" alt="Design as Art"></div>
+      <div class="book-body"><div class="book-spine"></div>
+      <span class="book-tag tag-accent">Design Theory</span>
+      <h3>Design as Art</h3>
+      <p class="book-author">Bruno Munari</p>
+      <p>Written in 1966 and still feels radical. Munari argues that design is an art form and artists should think like designers. Short, witty essays accompanied by his distinctive visual style. Essential reading for anyone in any creative field.</p>
+      <a href="https://amzn.to/3PFq8mr" target="_blank" rel="noopener" class="buy-btn accent">Buy on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-img"><img src="user-friendly.jpg" alt="User-Friendly"></div>
+      <div class="book-body"><div class="book-spine"></div>
+      <span class="book-tag tag-accent">UX Design</span>
+      <h3>User-Friendly</h3>
+      <p class="book-author">Cliff Kuang & Robert Fabricant</p>
+      <p>A deeply researched history of how human-centred design came to shape the products we use today. From cockpit controls to smartphones — this traces the thinking behind why certain designs work and others kill people. Reads like a thriller, teaches like a textbook.</p>
+      <a href="https://amzn.to/4sHezcP" target="_blank" rel="noopener" class="buy-btn accent">Buy on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-img"><img src="creative-confidence.jpg" alt="Creative Confidence"></div>
+      <div class="book-body"><div class="book-spine"></div>
+      <span class="book-tag tag-accent">Creative Thinking</span>
+      <h3>Creative Confidence</h3>
+      <p class="book-author">Tom Kelley</p>
+      <p>From the founders of IDEO, this is a practical manifesto for anyone who thinks they "aren't creative." Packed with exercises and stories that show how creativity is a skill you build, not a talent you're born with. Highly recommended for teams and individuals alike.</p>
+      <a href="https://amzn.to/3NV3LsD" target="_blank" rel="noopener" class="buy-btn accent">Buy on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-img"><img src="design-of-everyday-things.jpg" alt="The Design of Everyday Things"></div>
+      <div class="book-body"><div class="book-spine"></div>
+      <span class="book-tag tag-accent">UX Classic</span>
+      <h3>The Design of Everyday Things</h3>
+      <p class="book-author">Don Norman</p>
+      <p>The book that coined the term "affordance" in design. Once you read it you'll never use a badly designed door without feeling irrationally annoyed. Norman's core argument — that bad design blames users when it should blame designers — is as relevant as ever.</p>
+      <a href="https://amzn.to/4v0pgZC" target="_blank" rel="noopener" class="buy-btn accent">Buy on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-img"><img src="emotional-design.jpg" alt="Emotional Design"></div>
+      <div class="book-body"><div class="book-spine"></div>
+      <span class="book-tag tag-accent">Psychology of Design</span>
+      <h3>Emotional Design</h3>
+      <p class="book-author">Don Norman</p>
+      <p>The sequel to Everyday Things, and in some ways more interesting. Norman explores why we form emotional attachments to objects and how beauty affects usability. The three levels of design — visceral, behavioural, reflective — are a framework I think about constantly.</p>
+      <a href="https://amzn.to/4s4yUb1" target="_blank" rel="noopener" class="buy-btn accent">Buy on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-img"><img src="steal-like-an-artist.jpg" alt="Steal Like an Artist"></div>
+      <div class="book-body"><div class="book-spine"></div>
+      <span class="book-tag tag-accent">Creativity</span>
+      <h3>Steal Like an Artist</h3>
+      <p class="book-author">Austin Kleon</p>
+      <p>A short, illustrated manifesto about creative influence. Kleon argues that all creative work builds on what came before — and that's not plagiarism, it's how art evolves. Full of practical, liberating advice for anyone making things. Read it in an afternoon, think about it for years.</p>
+      <a href="https://amzn.to/412uCGg" target="_blank" rel="noopener" class="buy-btn accent">Buy on Amazon →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <h2 class="section-title">My 2026 Reading List</h2>
+  <div class="book-grid">
+
+    <div class="book-card">
+      <div class="book-img"><img src="adventures-in-stationery.jpg" alt="Adventures in Stationery"></div>
+      <div class="book-body"><div class="book-spine teal"></div>
+      <span class="book-tag tag-teal">2026 Read</span>
+      <h3>Adventures in Stationery</h3>
+      <p class="book-author">James Ward</p>
+      <p>A love letter to office supplies. Ward explores the surprising history behind paper clips, Post-it Notes, and staplers. Quirky and charming — ideal for anyone who takes disproportionate pleasure in a good notebook or pen.</p>
+      <a href="https://amzn.to/47ywl9T" target="_blank" rel="noopener" class="buy-btn">Buy on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-img"><img src="guardian-and-a-thief.jpg" alt="A Guardian and a Thief"></div>
+      <div class="book-body"><div class="book-spine teal"></div>
+      <span class="book-tag tag-teal">2026 Read</span>
+      <h3>A Guardian and a Thief</h3>
+      <p class="book-author">Megha Majumdar</p>
+      <p>Megha Majumdar's follow-up to A Burning. Her prose is exact and electric, and her ability to inhabit characters across different strata of Indian society is extraordinary. On my list for early 2026.</p>
+      <a href="https://amzn.to/4s2u1PK" target="_blank" rel="noopener" class="buy-btn">Buy on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-img"><img src="october-junction.jpg" alt="October Junction"></div>
+      <div class="book-body"><div class="book-spine teal"></div>
+      <span class="book-tag tag-teal">2026 Read</span>
+      <h3>October Junction</h3>
+      <p class="book-author">Divya Prakash Dubey</p>
+      <p>Dubey writes Hindi fiction with a distinctly contemporary urban voice. October Junction is reportedly a story about transit, connection, and the accidental meetings that change the course of things. Picked this up on a recommendation and looking forward to it.</p>
+      <a href="https://amzn.in/d/06bYPUVq" target="_blank" rel="noopener" class="buy-btn">Buy on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-img"><img src="the-elsewherians.jpg" alt="The Elsewherians"></div>
+      <div class="book-body"><div class="book-spine teal"></div>
+      <span class="book-tag tag-teal">2026 Read</span>
+      <h3>The Elsewherians</h3>
+      <p class="book-author">Jeet Thayil</p>
+      <p>Jeet Thayil is one of India's most interesting prose writers, and this novel apparently pushes his style further into experimental territory. On my list purely because his sentences are the kind you reread immediately.</p>
+      <a href="https://amzn.to/4m2QgUm" target="_blank" rel="noopener" class="buy-btn">Buy on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-img"><img src="whole-numbers-half-truths.jpg" alt="Whole Numbers, Half Truths"></div>
+      <div class="book-body"><div class="book-spine teal"></div>
+      <span class="book-tag tag-teal">2026 Read</span>
+      <h3>Whole Numbers, Half Truths</h3>
+      <p class="book-author">Rukmini S</p>
+      <p>A data journalist's examination of what statistics actually tell us about India — and what they hide. Rukmini S brings rigour and accessibility to questions about poverty, identity, and democracy. Essential for anyone who wants to understand contemporary India beyond the headlines.</p>
+      <a href="https://amzn.to/4bGSDZr" target="_blank" rel="noopener" class="buy-btn">Buy on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div class="book-img"><img src="madmans-library.jpg" alt="The Madman's Library"></div>
+      <div class="book-body"><div class="book-spine teal"></div>
+      <span class="book-tag tag-teal">2026 Read</span>
+      <h3>The Madman's Library</h3>
+      <p class="book-author">Edward Brooke-Hitching</p>
+      <p>A beautifully illustrated tour through history's strangest and most extraordinary books — fake atlases, books written in blood, medieval manuscripts about imaginary creatures. Perfect for bibliophiles who love the weird corners of history.</p>
+      <a href="https://amzn.to/4lWFBdH" target="_blank" rel="noopener" class="buy-btn">Buy on Amazon →</a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <strong>Curated Finds</strong><br>
+      As an Amazon Associate I earn from qualifying purchases.<br>
+      Prices and availability are subject to change.
+    </div>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a>
+      <a href="furnishings.html">Home & Living</a>
+      <a href="skincare.html">Skin Care</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home & Living – Curated Finds</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --cream: #FAF7F2;
+    --warm-white: #FFFDF9;
+    --ink: #1A1612;
+    --muted: #6B6460;
+    --accent: #C4622D;
+    --accent-light: #F5E6DC;
+    --border: #E8E2D9;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+  body { background: var(--cream); color: var(--ink); font-family: var(--sans); font-weight: 300; line-height: 1.7; }
+  a { color: inherit; text-decoration: none; }
+
+  nav { background: var(--warm-white); border-bottom: 1px solid var(--border); padding: 0 5%; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; z-index: 100; }
+  .logo { font-family: var(--serif); font-size: 1.25rem; }
+  .logo span { color: var(--accent); font-style: italic; }
+  .nav-links { display: flex; gap: 2rem; font-size: 0.875rem; font-weight: 400; }
+  .nav-links a { color: var(--muted); transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+  .page-hero { padding: 4rem 5% 3rem; border-bottom: 1px solid var(--border); }
+  .breadcrumb { font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; }
+  .breadcrumb a { color: var(--accent); }
+  .page-hero h1 { font-family: var(--serif); font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 0.75rem; }
+  .page-hero p { color: var(--muted); max-width: 560px; font-size: 0.95rem; }
+
+  .products-section { padding: 3rem 5%; }
+  .section-title { font-family: var(--serif); font-size: 1.4rem; margin-bottom: 1.75rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; margin-bottom: 3.5rem; }
+  .product-card { background: var(--warm-white); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; transition: box-shadow 0.2s, transform 0.2s; }
+  .product-card:hover { box-shadow: 0 6px 28px rgba(26,22,18,0.08); transform: translateY(-3px); }
+  .product-img { width: 100%; aspect-ratio: 1 / 1; background: var(--accent-light); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .product-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .product-img-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; width: 100%; height: 100%; color: var(--accent); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; text-align: center; }
+  .product-img-placeholder svg { opacity: 0.4; }
+  .product-body { padding: 1.25rem; display: flex; flex-direction: column; flex: 1; }
+  .product-tag { display: inline-block; font-size: 0.68rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; border-radius: 20px; margin-bottom: 0.75rem; background: var(--accent-light); color: var(--accent); }
+  .product-body h3 { font-family: var(--serif); font-size: 1.05rem; line-height: 1.3; margin-bottom: 0.75rem; }
+  .product-body p { font-size: 0.875rem; color: var(--muted); line-height: 1.7; flex: 1; margin-bottom: 1rem; }
+  .product-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
+  .tag { background: #EDE8E1; color: var(--muted); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 20px; }
+  .buy-btn { background: var(--accent); color: white; border: none; padding: 0.55rem 1rem; border-radius: 6px; font-family: var(--sans); font-size: 0.8rem; font-weight: 500; cursor: pointer; text-align: center; transition: opacity 0.2s; display: block; }
+  .buy-btn:hover { opacity: 0.85; }
+
+  footer { background: var(--ink); color: #B0A89E; padding: 2.5rem 5%; font-size: 0.82rem; line-height: 1.8; margin-top: 4rem; }
+  footer strong { color: #FAF7F2; }
+  .footer-inner { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1.5rem; }
+  .footer-nav { display: flex; gap: 1.5rem; }
+  .footer-nav a { color: #B0A89E; }
+  .footer-nav a:hover { color: #FAF7F2; }
+  @media (max-width: 640px) { .nav-links { display: none; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Curated <span>Finds</span></a>
+  <div class="nav-links">
+    <a href="furnishings.html" class="active">Home & Living</a>
+    <a href="books.html">Books</a>
+    <a href="skincare.html">Skin Care</a>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <p class="breadcrumb"><a href="index.html">Home</a> → Home & Living</p>
+  <h1>Home & Living</h1>
+  <p>Carefully selected home and living products that are functional, well-designed, and worth the spend — more comfortable, more organised, or just more pleasant to look at every day.</p>
+</div>
+
+<div class="products-section">
+
+  <h2 class="section-title">Seating & Comfort</h2>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-img"><img src="brown-quilt-chair.jpg" alt="Brown Quilt Chair"></div>
+      <div class="product-body">
+        <span class="product-tag">Seating</span>
+        <h3>Brown Quilt Chair</h3>
+        <p>A beautifully textured quilted armchair that punches well above its price point. The deep brown upholstery goes with almost any warm-toned interior, and the seat cushion holds its shape even after extended use. Perfect as a reading corner piece or beside a writing desk.</p>
+        <div class="product-tags"><span class="tag">Living Room</span><span class="tag">Work From Home</span></div>
+        <a href="https://amzn.to/4m0nT99" target="_blank" rel="noopener" class="buy-btn">View on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img"><img src="zero-gravity-chair.jpg" alt="Zero Gravity Chair"></div>
+      <div class="product-body">
+        <span class="product-tag">Outdoor & Relaxation</span>
+        <h3>Zero Gravity Chair</h3>
+        <p>If you haven't tried a zero gravity recliner, you're missing out. The recline angle distributes your weight evenly, which is genuinely relief for anyone with a bad back. Folds flat for storage and surprisingly comfortable for the price.</p>
+        <div class="product-tags"><span class="tag">Back Relief</span><span class="tag">Balcony</span><span class="tag">Outdoor</span></div>
+        <a href="https://amzn.to/47vjy84" target="_blank" rel="noopener" class="buy-btn">View on Amazon →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <h2 class="section-title">Smart Home</h2>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-img"><img src="amazon-echo.jpg" alt="Amazon Echo"></div>
+      <div class="product-body">
+        <span class="product-tag">Smart Speaker</span>
+        <h3>Amazon Echo</h3>
+        <p>A daily essential for timers, reminders, music, and smart home control. The sound quality is genuinely good for its size, and the Alexa integration is seamless if you're already in that ecosystem. Setup takes about 5 minutes.</p>
+        <div class="product-tags"><span class="tag">Smart Home</span><span class="tag">Voice Control</span></div>
+        <a href="https://amzn.to/4m5iduU" target="_blank" rel="noopener" class="buy-btn">View on Amazon →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <h2 class="section-title">Storage & Organisation</h2>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-img"><img src="bathroom-mirror-cabinet.jpg" alt="Bathroom Mirror Cabinet"></div>
+      <div class="product-body">
+        <span class="product-tag">Bathroom Storage</span>
+        <h3>Bathroom Mirror Cabinet</h3>
+        <p>Looks like a regular mirror but opens up to solid shelving behind. Great for keeping skincare, medications, and small essentials out of sight but within reach. Clear mirror quality and solid hinges.</p>
+        <div class="product-tags"><span class="tag">Bathroom</span><span class="tag">Space Saving</span></div>
+        <a href="https://amzn.to/48jHITh" target="_blank" rel="noopener" class="buy-btn">View on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img"><img src="bathroom-wall-shelf.jpg" alt="Bathroom Wall Shelf"></div>
+      <div class="product-body">
+        <span class="product-tag">Bathroom Accessories</span>
+        <h3>Bathroom Wall Shelf</h3>
+        <p>A clean, minimal floating shelf that looks far more expensive than it is. Easy to install, water-resistant surface handles bathroom humidity without warping. Great for plants and daily-use products.</p>
+        <div class="product-tags"><span class="tag">Bathroom</span><span class="tag">Minimalist</span></div>
+        <a href="https://amzn.to/415lfpb" target="_blank" rel="noopener" class="buy-btn">View on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img"><img src="hanging-door-hooks.jpg" alt="Hanging Door Hooks"></div>
+      <div class="product-body">
+        <span class="product-tag">Entryway & Doors</span>
+        <h3>Hanging Door Hooks</h3>
+        <p>Damage-free hooks that hang over any standard door. No drilling, no marks on the wall, and surprisingly sturdy — great for robes, towels, and bags in every room.</p>
+        <div class="product-tags"><span class="tag">No Drilling</span><span class="tag">Rental-Friendly</span></div>
+        <a href="https://amzn.to/4rYNiBz" target="_blank" rel="noopener" class="buy-btn">View on Amazon →</a>
+      </div>
+    </div>
+
+    <div class="product-card">
+      <div class="product-img"><img src="cloth-stackable-storage.jpg" alt="Cloth Stackable Storage"></div>
+      <div class="product-body">
+        <span class="product-tag">Wardrobe Organisation</span>
+        <h3>Cloth Stackable Storage</h3>
+        <p>Collapsible fabric cubes that stack inside wardrobes or sit on shelves. Collapse flat when not in use — much more flexible than rigid boxes, and the fabric surface doesn't scratch other items.</p>
+        <div class="product-tags"><span class="tag">Closet</span><span class="tag">Stackable</span></div>
+        <a href="https://amzn.to/4th0P8y" target="_blank" rel="noopener" class="buy-btn">View on Amazon →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <h2 class="section-title">Decor</h2>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-img"><img src="chevron-wallpaper.jpg" alt="Chevron Wallpaper"></div>
+      <div class="product-body">
+        <span class="product-tag">Wall Decor</span>
+        <h3>Chevron Wallpaper</h3>
+        <p>A peel-and-stick chevron pattern that repositions without tearing the wall surface — great for renters. The pattern is crisp and the finish looks much more premium than you'd expect at this price.</p>
+        <div class="product-tags"><span class="tag">Rental-Friendly</span><span class="tag">Feature Wall</span><span class="tag">DIY</span></div>
+        <a href="https://amzn.to/41D3P3k" target="_blank" rel="noopener" class="buy-btn">View on Amazon →</a>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <strong>Curated Finds</strong><br>
+      As an Amazon Associate I earn from qualifying purchases.<br>
+      Prices and availability are subject to change.
+    </div>
+    <nav class="footer-nav">
+      <a href="index.html">Home</a>
+      <a href="books.html">Books</a>
+      <a href="skincare.html">Skin Care</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
